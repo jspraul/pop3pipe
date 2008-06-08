@@ -1,0 +1,24 @@
+<config>
+  <connections>
+    <connect pop3id="0" smtpid="0" emailid="0" active="False">
+      <times hours="0" minutes="10" seconds="0" />
+    </connect>
+    <connect pop3id="1" smtpid="2" emailid="2" active="True">
+      <times hours="0" minutes="1" seconds="0" />
+    </connect>
+  </connections>
+  <pop3hosts>
+    <pop3 description="WEB.DE" host="pop3.web.de" username="stiffler-meister" password="pass" active="False" />
+    <pop3 description="GMX" host="pop.gmx.net" username="Da_Groovy@gmx.de" password="h8tt0r1Hanz0" active="True" />
+  </pop3hosts>
+  <smtphosts>
+    <smtp description="WEB.DE smtp" host="smtp.web.de" username="stifler" password="pass" active="False" />
+    <smtp description="test smtp host" host="smtp.mail.de" username="name" password="pass" active="False" />
+    <smtp description="GMX" host="mail.gmx.net" username="Da_Groovy@gmx.de" password="h8tt0r1Hanz0" active="True" />
+  </smtphosts>
+  <mailaddresses>
+    <address name="notmyown" email="test@nix.de" active="False" />
+    <address name="WEB.DE" email="Stiffler-Meister@web.de" active="True" />
+    <address name="ALICE" email="stefanlau@alice-dsl.de" active="True" />
+  </mailaddresses>
+</config>
