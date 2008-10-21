@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace POP3Pipe
 {
@@ -38,17 +39,33 @@ namespace POP3Pipe
                 {
                     this.hostObj = new HostConfigObject();
                 }
-                this.hostObj.Description = this.txtDescription.Text;
-                this.hostObj.Host = this.txtHost.Text;
                 this.hostObj.Username = this.txtUsername.Text;
                 this.hostObj.Password = this.txtPassword.Text;
+                // If description is empty use the host name
+                if (this.txtDescription.Text == null || this.txtDescription.Text.Length == 0)
+                {
+                    this.txtDescription.Text = this.txtHost.Text;
+                }
+                this.hostObj.Description = this.txtDescription.Text;
+                this.hostObj.Host = this.txtHost.Text;
+                // Differ between port variants
+                if (this.txtPort.Text.Equals("###"))
+                {
+                    this.hostObj.Port = 0;
+                }
+                else if (this.txtPort.Text.Length == 0)
+                {
+                    MessageBox.Show("Enter a value as port number.");
+                    return;
+                }
+                else
+                {
+                    int portNr = 0;
+                    int.TryParse(this.txtPort.Text, out portNr);
+                    this.hostObj.Port = portNr;
+                }
                 this.DialogResult = DialogResult.OK;
                 this.Close();
-            }
-            else
-            {
-                MessageBox.Show("All fields must be filled and passwords must be equal.", "Invalid Entries", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                this.txtHost.Select();
             }
         }
 
@@ -56,21 +73,30 @@ namespace POP3Pipe
         {
             bool checkOK = true;
             StringBuilder errorMsg = new StringBuilder();
-            if (this.txtDescription.Text == null || this.txtDescription.Text.Length == 0)
+            if (this.txtHost.Text == null || this.txtHost.Text.Length == 0)
             {
-                errorMsg.Append((errorMsg.Length > 0 ? ", " : "") + "Description");
+                errorMsg.Append((errorMsg.Length > 0 ? ", " : "") + "POP3 Host");
                 if (checkOK)
                 {
-                    txtDescription.Select();
+                    this.txtHost.Select();
                 }
                 checkOK = false;
             }
-            if (this.txtHost.Text == null || this.txtHost.Text.Length == 0)
+            if (this.comboBoxPortVariant.Text == null || this.comboBoxPortVariant.Text.Length == 0)
             {
-                errorMsg.Append((errorMsg.Length > 0 ? ", " : "") + "Host");
+                errorMsg.Append((errorMsg.Length > 0 ? ", " : "") + "Port");
                 if (checkOK)
                 {
-                    txtHost.Select();
+                    this.comboBoxPortVariant.Select();
+                }
+                checkOK = false;
+            }
+            if (this.txtPort.Text == null || this.txtPort.Text.Length == 0)
+            {
+                errorMsg.Append((errorMsg.Length > 0 ? ", " : "") + "Port Number");
+                if (checkOK)
+                {
+                    this.txtPort.Select();
                 }
                 checkOK = false;
             }
@@ -79,7 +105,7 @@ namespace POP3Pipe
                 errorMsg.Append((errorMsg.Length > 0 ? ", " : "") + "Username");
                 if (checkOK)
                 {
-                    txtUsername.Select();
+                    this.txtUsername.Select();
                 }
                 checkOK = false;
             }
@@ -88,7 +114,7 @@ namespace POP3Pipe
                 errorMsg.Append((errorMsg.Length > 0 ? ", " : "") + "Password");
                 if (checkOK)
                 {
-                    txtPassword.Select();
+                    this.txtPassword.Select();
                 }
                 checkOK = false;
             }
@@ -97,7 +123,7 @@ namespace POP3Pipe
                 errorMsg.Append((errorMsg.Length > 0 ? ", " : "") + "Password Confirm");
                 if (checkOK)
                 {
-                    txtPasswordConfirm.Select();
+                    this.txtPasswordConfirm.Select();
                 }
                 checkOK = false;
             }
@@ -111,14 +137,14 @@ namespace POP3Pipe
                 errorMsg.Append("Passwords must be equal. Try again.\r\n");
                 if (checkOK)
                 {
-                    txtPassword.Select();
+                    this.txtPassword.Select();
                 }
                 checkOK = false;
             }
 
             // Check if dataset is already existing
             HostConfigObject hostObj = findPOP3ObjInList();
-            if (hostObj != null)
+            if (hostObj != null && this.hostObj == null)
             {
                 errorMsg.Append("This POP3 Host has already been entered.");
                 checkOK = false;
@@ -144,12 +170,32 @@ namespace POP3Pipe
                 this.txtPassword.Text = this.hostObj.Password;
                 this.txtPasswordConfirm.Text = this.hostObj.Password;
                 this.txtUsername.Text = this.hostObj.Username;
-
-                this.comboBoxPortVariant.SelectedIndex = 0;
+                if (this.hostObj.Port == 0)
+                {
+                    this.txtPort.Text = "###";
+                    this.comboBoxPortVariant.SelectedIndex = 0;
+                }
+                else
+                {
+                    if (this.hostObj.Port == 110)
+                    {
+                        this.comboBoxPortVariant.SelectedIndex = 1;
+                    }
+                    else if (this.hostObj.Port == 995)
+                    {
+                        this.comboBoxPortVariant.SelectedIndex = 2;
+                    }
+                    else
+                    {
+                        this.comboBoxPortVariant.SelectedIndex = 3;
+                    }
+                    this.txtPort.Text = this.hostObj.Port.ToString();
+                }
             }
             else
             {
                 this.Text = "Add POP3 Host Entry";
+                this.comboBoxPortVariant.SelectedIndex = 0;
             }
         }
 
@@ -159,6 +205,7 @@ namespace POP3Pipe
             {
                 if (this.txtDescription.Text.Equals(hostObj.Description) &&
                     this.txtHost.Text.Equals(hostObj.Host) &&
+                    this.txtPort.Text.Equals(hostObj.Port.ToString()) &&
                     this.txtUsername.Text.Equals(hostObj.Username) &&
                     this.txtPassword.Text.Equals(hostObj.Password))
                 {
@@ -199,6 +246,22 @@ namespace POP3Pipe
             if (this.txtPasswordConfirm.Text.Length > 0)
             {
                 this.txtPasswordConfirm.Text = "";
+            }
+        }
+
+        private string portTemp = "";
+
+        private void txtPort_TextChanged(object sender, EventArgs e)
+        {
+            TextBox textbox = (TextBox)sender;
+            Regex regex = new Regex(@"^((\d+)|(###))$");
+            if (regex.IsMatch(textbox.Text))
+            {
+                this.portTemp = textbox.Text;
+            }
+            else
+            {
+                textbox.Text = this.portTemp;
             }
         }
     }

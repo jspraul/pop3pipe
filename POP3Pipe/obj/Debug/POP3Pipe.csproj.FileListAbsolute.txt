@@ -22,3 +22,9 @@ C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\P
 C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\Projects\POP3Pipe\POP3Pipe\obj\Debug\POP3Pipe.ThunderbirdImport.resources
 C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\Projects\POP3Pipe\POP3Pipe\bin\Debug\Updater.dll
 C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\Projects\POP3Pipe\POP3Pipe\bin\Debug\Updater.pdb
+C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\Projects\POP3Pipe\POP3Pipe\obj\Debug\POP3Pipe.AboutBox.resources
+C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\Projects\POP3Pipe\POP3Pipe\obj\Debug\POP3_Pipe.TrustInfo.xml
+C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\Projects\POP3Pipe\POP3Pipe\bin\Debug\Updater.xml
+C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\Projects\POP3Pipe\POP3Pipe\bin\Debug\MRG.Controls.UI.dll
+C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\Projects\POP3Pipe\POP3Pipe\bin\Debug\MRG.Controls.UI.xml
+C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\Projects\POP3Pipe\POP3Pipe\bin\Debug\ICSharpCode.SharpZipLib.dll

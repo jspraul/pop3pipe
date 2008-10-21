@@ -7,6 +7,9 @@ using OpenPOP.POP3;
 
 namespace POP3Pipe
 {
+    /// <summary>
+    ///     DEPRECATED, use <c>ManagerPOP3</c> instead
+    /// </summary>
     class MailPOP3
     {
         public static bool running = true;
@@ -15,54 +18,94 @@ namespace POP3Pipe
         private static int STANDARD = 110;
         private static int SSL = 995;
 
-        public static Message[] Receive(HostConfigObject pop3config)
+        private static bool Connect(POPClient popClient, string host, int port)
         {
-            POPClient popClient = new POPClient();
-
-            bool connectFailed = false;
+            bool connected = false;
             try
             {
                 if (running)
                 {
-                    popClient.Connect(pop3config.Host, SSL);
-                    Messenger.sendMessage("Connecting to <" + pop3config.Host + "> using SSL.", Messenger.MessageTag.INFO);
+                    popClient.Connect(host, port);
+                    Logger.sendMessage("Connecting to [" + host + "] using port [" + port + "]" + (port == SSL ? " SSL" : "") + ".", Logger.MessageTag.INFO);
+                    connected = true;
                 }
-            } catch (Exception)
+            }
+            catch (Exception)
             {
-                Messenger.sendMessage("Unable to connect to <" + pop3config.Host + "> using SSL.", Messenger.MessageTag.ERROR);
-                connectFailed = true;
+                Logger.sendMessage("Unable to connect to [" + host + "] using port [" + port + "]" + (port == SSL ? " SSL" : "") + ".", Logger.MessageTag.ERROR);
             }
-            if (connectFailed){
-               try
+            return connected;
+        }
+
+        public static Message[] Receive(HostConfigObject pop3config)
+        {
+            POPClient popClient = new POPClient();
+            // Set timeouts to 5 seconds
+            popClient.ReceiveTimeOut = 5000;
+            popClient.SendTimeOut = 5000;
+            bool connected = false;
+
+            // Port is set to automatic, try SSL first, then STANDARD
+            if (pop3config.Port == 0)
+            {
+                Console.WriteLine("Automatic port is activated for POP3 host.");
+                Console.WriteLine("Trying to connect with SSL.");
+                connected = Connect(popClient,pop3config.Host, SSL);
+                if (!connected)
                 {
-                    if (running)
+                    Console.WriteLine("Connection denied.");
+                    Console.WriteLine("Trying to connect at standard port [" + STANDARD + "].");
+                    connected = Connect(popClient, pop3config.Host, STANDARD);
+                    if (!connected)
                     {
-                        popClient.Connect(pop3config.Host, STANDARD);
-                        Messenger.sendMessage("Connecting to <" + pop3config.Host + ">.", Messenger.MessageTag.INFO);
+                        Console.WriteLine("Connection denied.");
                     }
-                } catch (Exception)
+                    else
+                    {
+                        Console.WriteLine("Connection granted.");
+                    }
+                }
+                else
                 {
-                    Messenger.sendMessage("Unable to connect to <" + pop3config.Host + ">.", Messenger.MessageTag.ERROR);
-                    connectFailed = true;
+                    Console.WriteLine("Connection granted.");
                 }
             }
+            else
+            {
+                Console.WriteLine("Currently activated port: " + pop3config.Port);
+                Console.WriteLine("Trying to connect at this port.");
+                connected = Connect(popClient,pop3config.Host, pop3config.Port);
+                if (!connected)
+                {
+                    Console.WriteLine("Connection denied.");
+                }
+                else
+                {
+                    Console.WriteLine("Connection granted.");
+                }
+            }
+
             bool errorOccured = false;
             // Contacting the server and login
             
             Message[] msgArray = null;
-            if (!connectFailed){
+            if (connected){
                 try {
+                    Console.WriteLine("Starting authentication.");
                     AuthenticationMethod auth = AuthenticationMethod.TRYBOTH;
                     popClient.Authenticate(pop3config.Username, pop3config.Password, auth);
-                    Messenger.sendMessage("Login successful.", Messenger.MessageTag.INFO);
+                    Logger.sendMessage("Login successful.", Logger.MessageTag.INFO);
+                    Console.WriteLine("login successful.");
 
                     int msgCount = popClient.GetMessageCount();
-                    Messenger.sendMessage("Account statistics loaded. " + msgCount + " messages on server.", Messenger.MessageTag.INFO);
+                    Logger.sendMessage("Account statistics loaded. [" + msgCount + "] messages on server.", Logger.MessageTag.INFO);
+                    Console.WriteLine("Account statistics loaded. [" + msgCount + "] messages on server.");
 
                     List<Message> msgs = new List<Message>();
 
+                    //System.Windows.Forms.MessageBox.Show("Fetching first 3 messages only (Bugfixing)");
                     // Mailbox entries always start with "1"
-                    for (int i = 1; i <= msgCount; i++)
+                    for (int i = 1; i <= 3; i++) // msgCount
                     {
                         if (running)
                         {
@@ -80,7 +123,7 @@ namespace POP3Pipe
                 catch (Exception)
                 {
                     errorOccured = true;
-                    Messenger.sendMessage("Problem while receiving message/s.", Messenger.MessageTag.ERROR);
+                    Logger.sendMessage("Problem while receiving message/s.", Logger.MessageTag.ERROR);
                 }
                 finally
                 {
@@ -89,7 +132,7 @@ namespace POP3Pipe
             }
             if (!errorOccured)
             {
-                Messenger.sendMessage("Received " + (msgArray != null ? msgArray.Length.ToString() : "no") + " mails from " + pop3config.Description + ".", Messenger.MessageTag.INFO);
+                Logger.sendMessage("Received " + (msgArray != null ? msgArray.Length.ToString() : "no") + " mails from " + pop3config.Description + ".", Logger.MessageTag.INFO);
             }
             return msgArray;
         }

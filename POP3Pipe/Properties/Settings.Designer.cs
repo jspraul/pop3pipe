@@ -31,5 +31,14 @@ namespace POP3Pipe.Properties {
                 return ((string)(this["ConfigFile"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("uidcache.xml")]
+        public string UIDCache {
+            get {
+                return ((string)(this["UIDCache"]));
+            }
+        }
     }
 }

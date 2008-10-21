@@ -132,10 +132,42 @@
   <metadata name="contextMenuConnections.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>543, 13</value>
   </metadata>
+  <metadata name="contextMenuLogs.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>393, 49</value>
+  </metadata>
   <metadata name="menuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>14, 14</value>
   </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>48</value>
+  <metadata name="threadComManager.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>23, 49</value>
   </metadata>
+  <metadata name="threadPOP3.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>172, 49</value>
+  </metadata>
+  <metadata name="threadSMTP.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>282, 49</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>74</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAEBAAAAEAGABoAwAAFgAAACgAAAAQAAAAIAAAAAEAGAAAAAAAAAAAABMLAAATCwAAAAAAAAAA
+        AABzd090d1Bzd1Bzdk9zdk9ydk9xdU5wdU1wdE1vc0xuckttcUlrb0hpbEZnakNlaUGdn2ObnmOZnGKW
+        mWCUl1+RlF2PkluMj1mJi1aGiVSDhVKAg1B+gU97fk9+gVSDhVONjl+LjGGJimKJi2eJimuIiW2JiXOG
+        h3KEhHSCgXR9fHJ6enJ+gHqBgXyDgXyTkIKdm5Obm5KbmpOZmZKZmZKZmpOVlo2RkomMjYSGh32Dg3qB
+        gHiCgXeEgXiNiYGalI66uLKqqaCnp5+goZiampCSkoeIiHyCgXV9fHCAfnKIhXqUkIaloJquqaWvqqas
+        pqCfnpSOjoGHhnmBgHOBgHKDgnWMi3+XlIqppZ25trDBvrm8ubSvq6Wno5uxrKS2sayKhnWFgXKYlomd
+        mY2opJnAu7PSz8na19HPy8a1squno5qsp5u8tqzIw720r62cmYiGf21taFWtppzq5d3r5+Hi3djBvriw
+        rKOqppqxq57AvLDSz8nFwsCmo52bmnqtq3CWkH2Be2eZk4bd2M+1r6SxrJ+yrqC9uarMx7rf29TX1tOv
+        raqamIapp3bBvoDPzIepoY9+eGSKg3K+tqjEvq/HwrLTzMDl4Njs6+jBv7yalo6kon++u4DT0I3a15Ha
+        2JGGgG+Ae2qim43a0sLY0cPv6+L59PLa19ain5qamIW1soHT0I/g3Znk4Zrj4Jnj4JiIhXp+fG5pZVbL
+        xr7////p5+SzsKmWkoevrYnMyYzk4Jzs6KHs6KHr6KDr56Dr556hnI6FgHFoY1J2cWXOycWZkomfm4jA
+        vYzg3J/t6ajx7avw7Krw7Krv66nv66jv66e4tZp4cGFkXUteV0Wdl4yxrpHTz5zp567x7bPy7rLx7bPx
+        7bPx7bLw7LHv67Dw7K/Z1qutqpZ7dmaXlILBwJvi37Lv7b3z8L/z8L/y8L/y777y777x777x7r3w7r3w
+        7rz09N/h4c7Q0MHb2sft7Nn19N/19eD19OD19N/09N/09N70897z897z8t3z8t3z890AAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+</value>
+  </data>
 </root>

@@ -6,6 +6,14 @@ namespace POP3Pipe
 {
     public class ConnectionObject
     {
+        private int connectionID;
+
+        public int ConnectionID
+        {
+            get { return connectionID; }
+            set { connectionID = value; }
+        }
+
         private int pop3ID;
 
         public int Pop3ID
@@ -52,6 +60,14 @@ namespace POP3Pipe
         {
             get { return continousMode; }
             set { continousMode = value; }
+        }
+
+        private int order;
+
+        public int Order
+        {
+            get { return order; }
+            set { order = value; }
         }
     }
 }

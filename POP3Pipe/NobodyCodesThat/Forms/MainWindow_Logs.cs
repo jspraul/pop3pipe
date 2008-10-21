@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Runtime.CompilerServices;
 
 namespace POP3Pipe
 {
     public partial class MainWindow : Form
     {
         private string tempMsg;
-        private Messenger.MessageTag messageTag;
-        private static int richTextBoxPosition;
+        private Logger.MessageTag messageTag;
 
         private void UpdateRichTextBox()
         {
@@ -26,31 +26,31 @@ namespace POP3Pipe
                 Color msgColor = Color.Black;
                 switch (this.messageTag)
                 {
-                    case Messenger.MessageTag.ERROR:
+                    case Logger.MessageTag.ERROR:
                         msgType = this.messageTag.ToString() + ": ";
                         msgColor = Color.Red;
                         break;
-                    case Messenger.MessageTag.WARNING:
+                    case Logger.MessageTag.WARNING:
                         msgType = this.messageTag.ToString() + ": ";
                         msgColor = Color.Yellow;
                         break;
-                    case Messenger.MessageTag.INFO:
+                    case Logger.MessageTag.INFO:
                         msgType = this.messageTag.ToString() + ": ";
                         msgColor = Color.Blue;
                         break;
-                    case Messenger.MessageTag.DIVIDE:
+                    case Logger.MessageTag.DIVIDE:
                         msgType = "------------------------------------";
                         break;
                     default:
                         break;
                 }
-                if (this.messageTag != Messenger.MessageTag.DIVIDE)
+                if (this.messageTag != Logger.MessageTag.DIVIDE)
                 {
                     string timeString = DateTime.Now.ToLongTimeString() + " ";
                     formatRichText(timeString, FontStyle.Bold, Color.Black);
                 }
                 formatRichText(msgType, FontStyle.Bold, msgColor);
-                if (messageTag != Messenger.MessageTag.DIVIDE)
+                if (messageTag != Logger.MessageTag.DIVIDE)
                 {
                     formatRichText(tempMsg, FontStyle.Regular, msgColor);
                 }
@@ -59,22 +59,25 @@ namespace POP3Pipe
             }
         }
 
+        /// <summary>
+        ///     Used synchronized implementation method because of asynchronous message display.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="style"></param>
+        /// <param name="color"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         private void formatRichText(string text, FontStyle style, Color color)
         {
+            int startPos = textLog.SelectionStart;
             textLog.AppendText(text);
-            if (richTextBoxPosition < textLog.Text.Length)
-            {
-                int foundHere = textLog.Find(text, richTextBoxPosition, RichTextBoxFinds.None);
-                if (foundHere != -1)
-                {
-                    textLog.SelectionFont = new Font("Courier New", 8, style);
-                    textLog.SelectionColor = color;
-                    richTextBoxPosition += text.Length;
-                }
-            }
+            textLog.SelectionStart = startPos;
+            textLog.SelectionLength = text.Length;
+            textLog.SelectionFont = new Font("Courier New", 8, style);
+            textLog.SelectionColor = color;
+            textLog.SelectionStart += text.Length;
         }
 
-        public void addMessage(string message, Messenger.MessageTag tag)
+        public void addMessage(string message, Logger.MessageTag tag)
         {
             tempMsg = message;
             messageTag = tag;

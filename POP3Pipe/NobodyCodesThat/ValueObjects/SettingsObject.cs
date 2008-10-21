@@ -39,5 +39,17 @@ namespace POP3Pipe
             get { return listAddress; }
             set { listAddress = value; }
         }
+
+        private static Dictionary<int, List<string>> cacheUIDs;
+
+        /// <summary>
+        ///     Key: connect ID
+        ///     Value: UID cache
+        /// </summary>
+        public static Dictionary<int, List<string>> CacheUIDs
+        {
+            get { return cacheUIDs; }
+            set { cacheUIDs = value; }
+        }
     }
 }

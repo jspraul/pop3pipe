@@ -38,24 +38,21 @@ namespace POP3Pipe
                 {
                     this.addrObj = new AddressObject();
                 }
+                if (this.txtDescription.Text == null || this.txtDescription.Text.Length == 0)
+                {
+                    this.txtDescription.Text = this.txtEMail.Text;
+                }
                 this.addrObj.AddressName = this.txtDescription.Text;
                 this.addrObj.AddressEMail = this.txtEMail.Text;
                 this.DialogResult = DialogResult.OK;
                 this.Close();
-            }
-            else
-            {
-                MessageBox.Show("All fields must be filled.", "Invalid Entries", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                this.txtDescription.Select();
             }
         }
 
         private bool validation()
         {
             bool checkOK = true;
-            if (this.txtDescription.Text == null ||
-                this.txtDescription.Text.Length == 0 ||
-                this.txtEMail.Text == null ||
+            if (this.txtEMail.Text == null ||
                 this.txtEMail.Text.Length == 0)
             {
                 return false;

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Updater;
 
 namespace POP3Pipe
 {
@@ -12,9 +13,16 @@ namespace POP3Pipe
         [STAThread]
         static void Main()
         {
+            Program.info.ModuleName = "pop3pipe";
+            Program.info.Version = "080";
+            Program.info.Build = "25062008";
+            Program.info.UpdateLocation = "http://pop3pipe.googlecode.com/svn/trunk";
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainWindow());
         }
+
+        public static ProgramInfo info = new ProgramInfo();
     }
 }
