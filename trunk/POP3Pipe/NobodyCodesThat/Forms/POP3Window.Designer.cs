@@ -49,7 +49,7 @@ namespace POP3Pipe
             this.btnOk.Location = new System.Drawing.Point(259, 12);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(28, 131);
-            this.btnOk.TabIndex = 5;
+            this.btnOk.TabIndex = 7;
             this.btnOk.Text = "OK";
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
@@ -66,6 +66,7 @@ namespace POP3Pipe
             // txtHost
             // 
             this.txtHost.Location = new System.Drawing.Point(117, 34);
+            this.txtHost.MaxLength = 255;
             this.txtHost.Name = "txtHost";
             this.txtHost.Size = new System.Drawing.Size(136, 20);
             this.txtHost.TabIndex = 1;
@@ -73,6 +74,7 @@ namespace POP3Pipe
             // txtDescription
             // 
             this.txtDescription.Location = new System.Drawing.Point(117, 12);
+            this.txtDescription.MaxLength = 255;
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(136, 20);
             this.txtDescription.TabIndex = 0;
@@ -100,17 +102,18 @@ namespace POP3Pipe
             this.comboBoxPortVariant.Location = new System.Drawing.Point(117, 56);
             this.comboBoxPortVariant.Name = "comboBoxPortVariant";
             this.comboBoxPortVariant.Size = new System.Drawing.Size(92, 21);
-            this.comboBoxPortVariant.TabIndex = 15;
+            this.comboBoxPortVariant.TabIndex = 2;
             this.comboBoxPortVariant.SelectedIndexChanged += new System.EventHandler(this.comboBoxPortVariant_SelectedIndexChanged);
             // 
             // txtPort
             // 
             this.txtPort.Enabled = false;
             this.txtPort.Location = new System.Drawing.Point(215, 57);
-            this.txtPort.MaxLength = 1023;
+            this.txtPort.MaxLength = 4;
             this.txtPort.Name = "txtPort";
             this.txtPort.Size = new System.Drawing.Size(38, 20);
-            this.txtPort.TabIndex = 16;
+            this.txtPort.TabIndex = 3;
+            this.txtPort.TextChanged += new System.EventHandler(this.txtPort_TextChanged);
             // 
             // label1
             // 
@@ -136,7 +139,7 @@ namespace POP3Pipe
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(136, 20);
-            this.txtPassword.TabIndex = 19;
+            this.txtPassword.TabIndex = 5;
             this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
             // 
             // txtPasswordConfirm
@@ -145,7 +148,7 @@ namespace POP3Pipe
             this.txtPasswordConfirm.Name = "txtPasswordConfirm";
             this.txtPasswordConfirm.PasswordChar = '*';
             this.txtPasswordConfirm.Size = new System.Drawing.Size(136, 20);
-            this.txtPasswordConfirm.TabIndex = 20;
+            this.txtPasswordConfirm.TabIndex = 6;
             // 
             // lblPassword
             // 
@@ -161,16 +164,17 @@ namespace POP3Pipe
             this.lblUsername.AutoSize = true;
             this.lblUsername.Location = new System.Drawing.Point(15, 82);
             this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(63, 13);
+            this.lblUsername.Size = new System.Drawing.Size(58, 13);
             this.lblUsername.TabIndex = 21;
-            this.lblUsername.Text = "User Name:";
+            this.lblUsername.Text = "Username:";
             // 
             // txtUsername
             // 
             this.txtUsername.Location = new System.Drawing.Point(117, 79);
+            this.txtUsername.MaxLength = 255;
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(136, 20);
-            this.txtUsername.TabIndex = 18;
+            this.txtUsername.TabIndex = 4;
             // 
             // POP3Window
             // 

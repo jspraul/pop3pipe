@@ -7,7 +7,6 @@ namespace POP3Pipe
     public class HostConfigObject
     {
         private string description;
-
         public string Description
         {
             get { return description; }
@@ -15,15 +14,20 @@ namespace POP3Pipe
         }
 
         private string host;
-
         public string Host
         {
             get { return host; }
             set { host = value; }
         }
 
-        private string username;
+        private string email;
+        public string EMail
+        {
+            get { return email; }
+            set { email = value; }
+        }
 
+        private string username;
         public string Username
         {
             get { return username; }
@@ -31,7 +35,6 @@ namespace POP3Pipe
         }
 
         private string password;
-
         public string Password
         {
             get { return password; }
@@ -39,7 +42,6 @@ namespace POP3Pipe
         }
 
         private int port;
-
         public int Port
         {
             get { return port; }
@@ -47,7 +49,6 @@ namespace POP3Pipe
         }
 
         private bool active;
-
         public bool Active
         {
             get { return active; }

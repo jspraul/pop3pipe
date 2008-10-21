@@ -60,9 +60,23 @@ namespace POP3Pipe.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap background {
+            get {
+                object obj = ResourceManager.GetObject("background", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap bubble {
             get {
                 object obj = ResourceManager.GetObject("bubble", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap cover_Kopie {
+            get {
+                object obj = ResourceManager.GetObject("cover Kopie", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

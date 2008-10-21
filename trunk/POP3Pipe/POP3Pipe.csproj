@@ -22,7 +22,9 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>2.0</OldToolsVersion>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+    <TargetZone>LocalIntranet</TargetZone>
     <PublishUrl>C:\publish\POP3Pipe\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -33,8 +35,10 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>false</MapFileExtensions>
+    <SupportUrl>http://pop3pipe.googlecode.com/svn/trunk</SupportUrl>
+    <ProductName>pop3pipe</ProductName>
+    <PublisherName>Nobody Codes That</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <DisallowUrlActivation>true</DisallowUrlActivation>
     <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
@@ -66,6 +70,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Extern\MIMEParser.dll</HintPath>
     </Reference>
+    <Reference Include="MRG.Controls.UI, Version=1.0.2601.14400, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MRG.Controls.UI.dll</HintPath>
+    </Reference>
     <Reference Include="OpenPOP, Version=2004.6.16.1248, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Extern\OpenPOP.dll</HintPath>
@@ -83,11 +91,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NobodyCodesThat\ManagerPOP3.cs" />
+    <Compile Include="NobodyCodesThat\ManagerSMTP.cs" />
+    <Compile Include="NobodyCodesThat\ExtTabControl\CustomTabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NobodyCodesThat\ExtTabControl\ThemedColors.cs" />
+    <Compile Include="NobodyCodesThat\Forms\AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NobodyCodesThat\Forms\AboutBox.Designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="NobodyCodesThat\Forms\AddressWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="NobodyCodesThat\Forms\AddressWindow.Designer.cs">
       <DependentUpon>AddressWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NobodyCodesThat\Forms\Thread_ComManager.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="NobodyCodesThat\Forms\MainWindow_Logs.cs">
       <SubType>Form</SubType>
@@ -130,6 +153,12 @@
     <Compile Include="NobodyCodesThat\Forms\MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="NobodyCodesThat\Forms\Thread_POP3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NobodyCodesThat\Forms\Thread_SMTP.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="NobodyCodesThat\Forms\ThunderbirdImport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,8 +166,13 @@
       <DependentUpon>ThunderbirdImport.cs</DependentUpon>
     </Compile>
     <Compile Include="NobodyCodesThat\ThunderbirdDataRetrieve.cs" />
+    <Compile Include="NobodyCodesThat\ValueObjects\UIDCacheObject.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="NobodyCodesThat\Forms\AboutBox.resx">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="NobodyCodesThat\Forms\AddressWindow.resx">
       <DependentUpon>AddressWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -185,7 +219,7 @@
     <Compile Include="NobodyCodesThat\MailPOP3.cs" />
     <Compile Include="NobodyCodesThat\MailSMTP.cs" />
     <Compile Include="NobodyCodesThat\Manager.cs" />
-    <Compile Include="NobodyCodesThat\Messenger.cs" />
+    <Compile Include="NobodyCodesThat\Logger.cs" />
     <Compile Include="NobodyCodesThat\ValueObjects\ConnectionObject.cs" />
     <Compile Include="NobodyCodesThat\ValueObjects\SettingsObject.cs" />
     <Compile Include="NobodyCodesThat\ValueObjects\AddressObject.cs" />
@@ -194,8 +228,11 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="POP3Pipe_TemporaryKey.pfx" />
+    <None Include="Properties\app.manifest" />
     <None Include="Resources\System-Task-Manager.ico" />
     <None Include="Resources\bubble.png" />
+    <None Include="Resources\cover Kopie.png" />
+    <None Include="Resources\background.jpg" />
     <Content Include="System-Task-Manager.ico" />
     <Content Include="Windows-View-Detail.ico" />
   </ItemGroup>

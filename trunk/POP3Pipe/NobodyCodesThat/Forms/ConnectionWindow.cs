@@ -40,26 +40,20 @@ namespace POP3Pipe
             bool fieldsOK = validation();
             if (fieldsOK)
             {
-                if (this.conObj == null)
-                {
-                    this.conObj = new ConnectionObject();
-                }
-                this.conObj.Pop3ID = this.comboPOP3.SelectedIndex - 1; //  <-- -1 because first line is "please select"
-                this.conObj.SmtpID = this.comboSMTP.SelectedIndex - 1;
-                this.conObj.AddressID = this.comboAddress.SelectedIndex - 1;
+                ConnectionObject newConObj = new ConnectionObject();
+                newConObj.Active = this.conObj != null ? this.conObj.Active : true;
+                newConObj.ContinousMode = this.checkBoxCycling.Checked;
                 int hours = (int)this.numericHours.Value;
                 int minutes = (int)this.numericMinutes.Value;
                 int seconds = (int)this.numericSeconds.Value;
-                this.conObj.WaitTime = new TimeSpan(hours, minutes, seconds);
-
-                this.conObj.ContinousMode = this.checkBoxCycling.Checked;
-
+                newConObj.WaitTime = new TimeSpan(hours, minutes, seconds);
+                newConObj.Order = this.conObj != null ? this.conObj.Order : 0;
+                newConObj.Pop3ID = this.comboPOP3.SelectedIndex - 1; //  <-- -1 because first line is "please select"
+                newConObj.SmtpID = this.comboSMTP.SelectedIndex - 1;
+                newConObj.AddressID = this.comboAddress.SelectedIndex - 1;
+                this.conObj = newConObj;
                 this.DialogResult = DialogResult.OK;
                 this.Close();
-            }
-            else
-            {
-                MessageBox.Show("All fields must be properly filled.", "Invalid Entries", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
          }
 
@@ -166,7 +160,8 @@ namespace POP3Pipe
         private void numericAutoSwitcher(object sender)
         {
             NumericUpDown switch1 = (NumericUpDown)sender;
-            NumericUpDown switch2;
+            NumericUpDown switch2 = null;
+            NumericUpDown switch3 = null;
             int oldValue;
             int newValue = (int)switch1.Value;
 
@@ -175,6 +170,7 @@ namespace POP3Pipe
                 oldValue = this.oldSecValue;
                 this.oldSecValue = newValue;
                 switch2 = this.numericMinutes;
+                switch3 = this.numericHours;
             }
             else if (switch1 == this.numericMinutes)
             {
@@ -190,8 +186,19 @@ namespace POP3Pipe
             // User is scrolling up
             if (oldValue == 59 && newValue == 60)
             {
-                switch2.Value++;
-                switch1.Value = 0;
+                if (switch2.Value < 59)
+                {
+                    switch2.Value++;
+                    switch1.Value = 0;
+                }
+                else
+                {
+                    if (switch3 != null)
+                    {
+                        switch3.Value++;
+                        switch2.Value = 0;
+                    }
+                }
             }
 
             // User is scrolling down
@@ -202,6 +209,24 @@ namespace POP3Pipe
                     switch2.Value--;
                     switch1.Value = 59;
                 }
+                else
+                {
+                    if (switch3 != null && switch3.Value > 0)
+                    {
+                        switch3.Value--;
+                        switch2.Value = 59;
+                    }
+                    else if (switch2.Value == 0)
+                    {
+                        switch1.Value = 0;
+                    }
+                }
+            }
+
+            // Reached the minimum value
+            if (this.numericMinutes.Value == 0 && this.numericHours.Value == 0 && this.numericSeconds.Value < 30)
+            {
+                this.numericSeconds.Value = 30;
             }
         }
 
@@ -210,25 +235,44 @@ namespace POP3Pipe
             int hours = (int)this.numericHours.Value;
             int minutes = (int)this.numericMinutes.Value;
             int seconds = (int)this.numericSeconds.Value;
+            if (hours < 0 || minutes < 0 || seconds < 0)
+            {
+                return;
+            }
             float minutesComplete = (hours * 60) + minutes + (seconds / 60);
-            this.numericTimesPerHour.Value = (int)(60 / minutesComplete);
+            if (minutesComplete == 0)
+            {
+                //this.numericSeconds.Value = 30;
+                return;
+            }
+            this.numericTimesPerHour.Value = (decimal)(60 / minutesComplete);
         }
 
         private void adjustHoursMinutesSeconds()
         {
-            int times = (int)this.numericTimesPerHour.Value;
-            int hours = 0;
-            float minutesFloat = 60f / (float)times;
-            int minutes = (int)(minutesFloat);
-            float secondsFloat = 60 * ((minutesFloat) - minutes);
-            int seconds = (int)secondsFloat;
-            if (minutes == 60)
+            decimal times = this.numericTimesPerHour.Value;
+            decimal hours = 0;
+            decimal minutes = 60 / times;
+            decimal seconds = 60 * (minutes % 60);
+            if (minutes > 59)
             {
-                hours = 1;
-                minutes = 0;
+                hours = minutes / 60;
+                minutes = minutes % 60;
+            }
+            if (hours >= this.numericHours.Maximum)
+            {
+                hours = this.numericHours.Maximum;
             }
             this.numericHours.Value = hours;
+            if (minutes >= this.numericMinutes.Maximum)
+            {
+                minutes = this.numericMinutes.Maximum;
+            }
             this.numericMinutes.Value = minutes;
+            if (seconds >= this.numericSeconds.Maximum)
+            {
+                seconds = this.numericSeconds.Maximum;
+            }
             this.numericSeconds.Value = seconds;
         }
 
@@ -249,6 +293,11 @@ namespace POP3Pipe
             {
                 adjustHoursMinutesSeconds();
             }
+        }
+
+        private void checkBoxLeaveMessages_CheckedChanged(object sender, EventArgs e)
+        {
+            this.checkBoxReceiveNewOnly.Enabled = this.checkBoxLeaveMessages.Checked;
         }
     }
 }

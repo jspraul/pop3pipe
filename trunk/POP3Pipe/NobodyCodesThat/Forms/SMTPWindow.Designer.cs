@@ -42,14 +42,16 @@ namespace POP3Pipe
             this.lblPort = new System.Windows.Forms.Label();
             this.txtPort = new System.Windows.Forms.TextBox();
             this.comboBoxPortVariant = new System.Windows.Forms.ComboBox();
+            this.lblEmail = new System.Windows.Forms.Label();
+            this.txtEmail = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnOk
             // 
             this.btnOk.Location = new System.Drawing.Point(259, 12);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(28, 131);
-            this.btnOk.TabIndex = 6;
+            this.btnOk.Size = new System.Drawing.Size(28, 153);
+            this.btnOk.TabIndex = 8;
             this.btnOk.Text = "OK";
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
@@ -57,68 +59,68 @@ namespace POP3Pipe
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(15, 104);
+            this.lblPassword.Location = new System.Drawing.Point(15, 126);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(56, 13);
-            this.lblPassword.TabIndex = 7;
+            this.lblPassword.TabIndex = 17;
             this.lblPassword.Text = "Password:";
             // 
             // lblUsername
             // 
             this.lblUsername.AutoSize = true;
-            this.lblUsername.Location = new System.Drawing.Point(15, 82);
+            this.lblUsername.Location = new System.Drawing.Point(15, 104);
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Size = new System.Drawing.Size(63, 13);
-            this.lblUsername.TabIndex = 6;
+            this.lblUsername.TabIndex = 16;
             this.lblUsername.Text = "User Name:";
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(117, 79);
+            this.txtUsername.Location = new System.Drawing.Point(117, 101);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(136, 20);
-            this.txtUsername.TabIndex = 3;
+            this.txtUsername.TabIndex = 5;
             // 
             // lblHost
             // 
             this.lblHost.AutoSize = true;
-            this.lblHost.Location = new System.Drawing.Point(15, 37);
+            this.lblHost.Location = new System.Drawing.Point(15, 59);
             this.lblHost.Name = "lblHost";
             this.lblHost.Size = new System.Drawing.Size(65, 13);
-            this.lblHost.TabIndex = 5;
+            this.lblHost.TabIndex = 15;
             this.lblHost.Text = "SMTP Host:";
             // 
             // txtHost
             // 
-            this.txtHost.Location = new System.Drawing.Point(117, 34);
+            this.txtHost.Location = new System.Drawing.Point(117, 56);
             this.txtHost.Name = "txtHost";
             this.txtHost.Size = new System.Drawing.Size(136, 20);
             this.txtHost.TabIndex = 2;
             // 
             // txtPasswordConfirm
             // 
-            this.txtPasswordConfirm.Location = new System.Drawing.Point(117, 123);
+            this.txtPasswordConfirm.Location = new System.Drawing.Point(117, 145);
             this.txtPasswordConfirm.Name = "txtPasswordConfirm";
             this.txtPasswordConfirm.PasswordChar = '*';
             this.txtPasswordConfirm.Size = new System.Drawing.Size(136, 20);
-            this.txtPasswordConfirm.TabIndex = 5;
+            this.txtPasswordConfirm.TabIndex = 7;
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(117, 101);
+            this.txtPassword.Location = new System.Drawing.Point(117, 123);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(136, 20);
-            this.txtPassword.TabIndex = 4;
+            this.txtPassword.TabIndex = 6;
             this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
             // 
             // lblPasswordConfirm
             // 
             this.lblPasswordConfirm.AutoSize = true;
-            this.lblPasswordConfirm.Location = new System.Drawing.Point(15, 126);
+            this.lblPasswordConfirm.Location = new System.Drawing.Point(15, 148);
             this.lblPasswordConfirm.Name = "lblPasswordConfirm";
             this.lblPasswordConfirm.Size = new System.Drawing.Size(94, 13);
-            this.lblPasswordConfirm.TabIndex = 8;
+            this.lblPasswordConfirm.TabIndex = 18;
             this.lblPasswordConfirm.Text = "Password Confirm:";
             // 
             // txtDescription
@@ -140,7 +142,7 @@ namespace POP3Pipe
             // lblPort
             // 
             this.lblPort.AutoSize = true;
-            this.lblPort.Location = new System.Drawing.Point(15, 60);
+            this.lblPort.Location = new System.Drawing.Point(15, 82);
             this.lblPort.Name = "lblPort";
             this.lblPort.Size = new System.Drawing.Size(62, 13);
             this.lblPort.TabIndex = 20;
@@ -149,11 +151,12 @@ namespace POP3Pipe
             // txtPort
             // 
             this.txtPort.Enabled = false;
-            this.txtPort.Location = new System.Drawing.Point(215, 57);
+            this.txtPort.Location = new System.Drawing.Point(215, 79);
             this.txtPort.MaxLength = 1023;
             this.txtPort.Name = "txtPort";
             this.txtPort.Size = new System.Drawing.Size(38, 20);
-            this.txtPort.TabIndex = 19;
+            this.txtPort.TabIndex = 4;
+            this.txtPort.TextChanged += new System.EventHandler(this.txtPort_TextChanged);
             // 
             // comboBoxPortVariant
             // 
@@ -166,18 +169,36 @@ namespace POP3Pipe
             "STANDARD",
             "SSL",
             "-- custom --"});
-            this.comboBoxPortVariant.Location = new System.Drawing.Point(117, 56);
+            this.comboBoxPortVariant.Location = new System.Drawing.Point(117, 78);
             this.comboBoxPortVariant.Name = "comboBoxPortVariant";
             this.comboBoxPortVariant.Size = new System.Drawing.Size(92, 21);
-            this.comboBoxPortVariant.TabIndex = 18;
+            this.comboBoxPortVariant.TabIndex = 3;
             this.comboBoxPortVariant.SelectedIndexChanged += new System.EventHandler(this.comboBoxPortVariant_SelectedIndexChanged);
+            // 
+            // lblEmail
+            // 
+            this.lblEmail.AutoSize = true;
+            this.lblEmail.Location = new System.Drawing.Point(15, 37);
+            this.lblEmail.Name = "lblEmail";
+            this.lblEmail.Size = new System.Drawing.Size(80, 13);
+            this.lblEmail.TabIndex = 22;
+            this.lblEmail.Text = "E-Mail Address:";
+            // 
+            // txtEmail
+            // 
+            this.txtEmail.Location = new System.Drawing.Point(117, 34);
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(136, 20);
+            this.txtEmail.TabIndex = 1;
             // 
             // SMTPWindow
             // 
             this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(299, 159);
+            this.ClientSize = new System.Drawing.Size(299, 177);
+            this.Controls.Add(this.lblEmail);
+            this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.lblPort);
             this.Controls.Add(this.txtPort);
             this.Controls.Add(this.comboBoxPortVariant);
@@ -223,5 +244,7 @@ namespace POP3Pipe
         private System.Windows.Forms.Label lblPort;
         private System.Windows.Forms.TextBox txtPort;
         private System.Windows.Forms.ComboBox comboBoxPortVariant;
+        private System.Windows.Forms.Label lblEmail;
+        private System.Windows.Forms.TextBox txtEmail;
     }
 }

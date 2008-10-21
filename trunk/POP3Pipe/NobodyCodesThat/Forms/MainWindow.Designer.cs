@@ -13,6 +13,7 @@ namespace POP3Pipe
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
+            //MainWindow.FadeForm(this, 50, false);
             if (disposing && (components != null))
             {
                 components.Dispose();
@@ -29,6 +30,7 @@ namespace POP3Pipe
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.btnStart = new System.Windows.Forms.Button();
             this.listViewPOP3 = new System.Windows.Forms.ListView();
             this.colPOP3Active = new System.Windows.Forms.ColumnHeader();
@@ -41,14 +43,6 @@ namespace POP3Pipe
             this.toolStripMenuPop3Add = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuPop3Edit = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuPop3Delete = new System.Windows.Forms.ToolStripMenuItem();
-            this.numericHours = new System.Windows.Forms.NumericUpDown();
-            this.lblHours = new System.Windows.Forms.Label();
-            this.lblMinutes = new System.Windows.Forms.Label();
-            this.numericMinutes = new System.Windows.Forms.NumericUpDown();
-            this.lblSeconds = new System.Windows.Forms.Label();
-            this.numericSeconds = new System.Windows.Forms.NumericUpDown();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBoxCyclingActive = new System.Windows.Forms.CheckBox();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPagePOP3 = new System.Windows.Forms.TabPage();
             this.tabPageSMTP = new System.Windows.Forms.TabPage();
@@ -87,34 +81,43 @@ namespace POP3Pipe
             this.toolStripMenuConnectionsEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuConnectionsDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.tabLogs = new System.Windows.Forms.TabPage();
-            this.btnExpand = new System.Windows.Forms.Button();
             this.textLog = new System.Windows.Forms.RichTextBox();
+            this.contextMenuLogs = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.clearConsoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
-            this.lblCountdown = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.configurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pop3ServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addPOP3ServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sMTPServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deletePOP3ServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.smtpServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addSMTPServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteServerToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteSMTPServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addressesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addAddressToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteAddressToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkForUpdateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.revisionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutThisProgramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
+            this.threadComManager = new System.ComponentModel.BackgroundWorker();
+            this.threadPOP3 = new System.ComponentModel.BackgroundWorker();
+            this.threadSMTP = new System.ComponentModel.BackgroundWorker();
             this.button3 = new System.Windows.Forms.Button();
+            this.loadingCircle = new MRG.Controls.UI.LoadingCircle();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.contextMenuPOP3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericHours)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericMinutes)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericSeconds)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabPagePOP3.SuspendLayout();
             this.tabPageSMTP.SuspendLayout();
@@ -124,14 +127,17 @@ namespace POP3Pipe
             this.tabPageConnections.SuspendLayout();
             this.contextMenuConnections.SuspendLayout();
             this.tabLogs.SuspendLayout();
+            this.contextMenuLogs.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(371, 211);
+            this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStart.Location = new System.Drawing.Point(397, 201);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(196, 30);
+            this.btnStart.Size = new System.Drawing.Size(159, 37);
             this.btnStart.TabIndex = 8;
             this.btnStart.Text = "START";
             this.btnStart.UseVisualStyleBackColor = true;
@@ -139,6 +145,9 @@ namespace POP3Pipe
             // 
             // listViewPOP3
             // 
+            this.listViewPOP3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewPOP3.CheckBoxes = true;
             this.listViewPOP3.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colPOP3Active,
@@ -238,94 +247,24 @@ namespace POP3Pipe
             this.toolStripMenuPop3Delete.Text = "Delete Item";
             this.toolStripMenuPop3Delete.Click += new System.EventHandler(this.toolMenuPop3Delete_Click);
             // 
-            // numericHours
-            // 
-            this.numericHours.Location = new System.Drawing.Point(43, 22);
-            this.numericHours.Name = "numericHours";
-            this.numericHours.Size = new System.Drawing.Size(81, 20);
-            this.numericHours.TabIndex = 12;
-            // 
-            // lblHours
-            // 
-            this.lblHours.AutoSize = true;
-            this.lblHours.Location = new System.Drawing.Point(132, 24);
-            this.lblHours.Name = "lblHours";
-            this.lblHours.Size = new System.Drawing.Size(35, 13);
-            this.lblHours.TabIndex = 13;
-            this.lblHours.Text = "Hours";
-            // 
-            // lblMinutes
-            // 
-            this.lblMinutes.AutoSize = true;
-            this.lblMinutes.Location = new System.Drawing.Point(132, 46);
-            this.lblMinutes.Name = "lblMinutes";
-            this.lblMinutes.Size = new System.Drawing.Size(44, 13);
-            this.lblMinutes.TabIndex = 15;
-            this.lblMinutes.Text = "Minutes";
-            // 
-            // numericMinutes
-            // 
-            this.numericMinutes.Location = new System.Drawing.Point(43, 44);
-            this.numericMinutes.Name = "numericMinutes";
-            this.numericMinutes.Size = new System.Drawing.Size(81, 20);
-            this.numericMinutes.TabIndex = 14;
-            // 
-            // lblSeconds
-            // 
-            this.lblSeconds.AutoSize = true;
-            this.lblSeconds.Location = new System.Drawing.Point(132, 68);
-            this.lblSeconds.Name = "lblSeconds";
-            this.lblSeconds.Size = new System.Drawing.Size(49, 13);
-            this.lblSeconds.TabIndex = 17;
-            this.lblSeconds.Text = "Seconds";
-            // 
-            // numericSeconds
-            // 
-            this.numericSeconds.Location = new System.Drawing.Point(43, 66);
-            this.numericSeconds.Name = "numericSeconds";
-            this.numericSeconds.Size = new System.Drawing.Size(81, 20);
-            this.numericSeconds.TabIndex = 16;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.checkBoxCyclingActive);
-            this.groupBox1.Controls.Add(this.lblMinutes);
-            this.groupBox1.Controls.Add(this.numericMinutes);
-            this.groupBox1.Controls.Add(this.lblSeconds);
-            this.groupBox1.Controls.Add(this.lblHours);
-            this.groupBox1.Controls.Add(this.numericHours);
-            this.groupBox1.Controls.Add(this.numericSeconds);
-            this.groupBox1.Location = new System.Drawing.Point(371, 89);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(195, 96);
-            this.groupBox1.TabIndex = 12;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Run process every:";
-            // 
-            // checkBoxCyclingActive
-            // 
-            this.checkBoxCyclingActive.AutoSize = true;
-            this.checkBoxCyclingActive.Enabled = false;
-            this.checkBoxCyclingActive.Location = new System.Drawing.Point(15, 44);
-            this.checkBoxCyclingActive.Name = "checkBoxCyclingActive";
-            this.checkBoxCyclingActive.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxCyclingActive.TabIndex = 18;
-            this.checkBoxCyclingActive.UseVisualStyleBackColor = true;
-            // 
             // tabControl
             // 
             this.tabControl.Alignment = System.Windows.Forms.TabAlignment.Bottom;
+            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl.Controls.Add(this.tabPagePOP3);
             this.tabControl.Controls.Add(this.tabPageSMTP);
             this.tabControl.Controls.Add(this.tabPageAddresses);
             this.tabControl.Controls.Add(this.tabPageConnections);
             this.tabControl.Controls.Add(this.tabLogs);
-            this.tabControl.Location = new System.Drawing.Point(3, 29);
+            this.tabControl.Location = new System.Drawing.Point(12, 38);
             this.tabControl.Multiline = true;
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(362, 200);
             this.tabControl.TabIndex = 16;
+            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
             // tabPagePOP3
             // 
@@ -335,7 +274,7 @@ namespace POP3Pipe
             this.tabPagePOP3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPagePOP3.Size = new System.Drawing.Size(354, 174);
             this.tabPagePOP3.TabIndex = 0;
-            this.tabPagePOP3.Text = "POP3 Hosts";
+            this.tabPagePOP3.Text = "POP3 Server";
             this.tabPagePOP3.UseVisualStyleBackColor = true;
             // 
             // tabPageSMTP
@@ -346,11 +285,14 @@ namespace POP3Pipe
             this.tabPageSMTP.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageSMTP.Size = new System.Drawing.Size(354, 174);
             this.tabPageSMTP.TabIndex = 2;
-            this.tabPageSMTP.Text = "SMTP Hosts";
+            this.tabPageSMTP.Text = "SMTP Server ";
             this.tabPageSMTP.UseVisualStyleBackColor = true;
             // 
             // listViewSMTP
             // 
+            this.listViewSMTP.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewSMTP.CheckBoxes = true;
             this.listViewSMTP.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colSMTPActive,
@@ -452,11 +394,14 @@ namespace POP3Pipe
             this.tabPageAddresses.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageAddresses.Size = new System.Drawing.Size(354, 174);
             this.tabPageAddresses.TabIndex = 4;
-            this.tabPageAddresses.Text = "Addresses";
+            this.tabPageAddresses.Text = "  Addresses  ";
             this.tabPageAddresses.UseVisualStyleBackColor = true;
             // 
             // listViewAddresses
             // 
+            this.listViewAddresses.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewAddresses.CheckBoxes = true;
             this.listViewAddresses.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colAddressesActive,
@@ -508,7 +453,7 @@ namespace POP3Pipe
             this.contextMenuAddresses.Name = "contextMenuList";
             this.contextMenuAddresses.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuAddresses.ShowImageMargin = false;
-            this.contextMenuAddresses.Size = new System.Drawing.Size(144, 120);
+            this.contextMenuAddresses.Size = new System.Drawing.Size(144, 98);
             // 
             // toolStripMenuItem2
             // 
@@ -553,11 +498,14 @@ namespace POP3Pipe
             this.tabPageConnections.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageConnections.Size = new System.Drawing.Size(354, 174);
             this.tabPageConnections.TabIndex = 3;
-            this.tabPageConnections.Text = "Connections";
+            this.tabPageConnections.Text = "  Connections  ";
             this.tabPageConnections.UseVisualStyleBackColor = true;
             // 
             // listViewConnections
             // 
+            this.listViewConnections.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewConnections.CheckBoxes = true;
             this.listViewConnections.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colConnectionsActive,
@@ -654,39 +602,46 @@ namespace POP3Pipe
             // 
             // tabLogs
             // 
-            this.tabLogs.Controls.Add(this.btnExpand);
             this.tabLogs.Controls.Add(this.textLog);
             this.tabLogs.Location = new System.Drawing.Point(4, 4);
             this.tabLogs.Name = "tabLogs";
             this.tabLogs.Padding = new System.Windows.Forms.Padding(3);
             this.tabLogs.Size = new System.Drawing.Size(354, 174);
             this.tabLogs.TabIndex = 1;
-            this.tabLogs.Text = "Logs";
+            this.tabLogs.Text = "  Logs  ";
             this.tabLogs.UseVisualStyleBackColor = true;
-            // 
-            // btnExpand
-            // 
-            this.btnExpand.Location = new System.Drawing.Point(342, -4);
-            this.btnExpand.Name = "btnExpand";
-            this.btnExpand.Size = new System.Drawing.Size(15, 180);
-            this.btnExpand.TabIndex = 1;
-            this.btnExpand.Text = ">>>";
-            this.btnExpand.UseVisualStyleBackColor = true;
-            this.btnExpand.Click += new System.EventHandler(this.btnExpand_Click);
             // 
             // textLog
             // 
+            this.textLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.textLog.BackColor = System.Drawing.Color.White;
+            this.textLog.ContextMenuStrip = this.contextMenuLogs;
             this.textLog.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textLog.Location = new System.Drawing.Point(0, 0);
             this.textLog.Name = "textLog";
             this.textLog.ReadOnly = true;
-            this.textLog.Size = new System.Drawing.Size(343, 172);
+            this.textLog.Size = new System.Drawing.Size(354, 172);
             this.textLog.TabIndex = 0;
             this.textLog.TabStop = false;
             this.textLog.Text = "";
             this.textLog.WordWrap = false;
             this.textLog.TextChanged += new System.EventHandler(this.textLog_TextChanged);
+            // 
+            // contextMenuLogs
+            // 
+            this.contextMenuLogs.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearConsoleToolStripMenuItem});
+            this.contextMenuLogs.Name = "contextMenuLogs";
+            this.contextMenuLogs.Size = new System.Drawing.Size(152, 26);
+            // 
+            // clearConsoleToolStripMenuItem
+            // 
+            this.clearConsoleToolStripMenuItem.Name = "clearConsoleToolStripMenuItem";
+            this.clearConsoleToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.clearConsoleToolStripMenuItem.Text = "Clear Console";
+            this.clearConsoleToolStripMenuItem.Click += new System.EventHandler(this.clearConsoleToolStripMenuItem_Click);
             // 
             // columnHeader1
             // 
@@ -703,19 +658,9 @@ namespace POP3Pipe
             this.columnHeader3.Text = "";
             this.columnHeader3.Width = 0;
             // 
-            // lblCountdown
-            // 
-            this.lblCountdown.AutoSize = true;
-            this.lblCountdown.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblCountdown.Location = new System.Drawing.Point(505, 189);
-            this.lblCountdown.Name = "lblCountdown";
-            this.lblCountdown.Padding = new System.Windows.Forms.Padding(5, 1, 5, 1);
-            this.lblCountdown.Size = new System.Drawing.Size(61, 17);
-            this.lblCountdown.TabIndex = 17;
-            this.lblCountdown.Text = "00:00:00";
-            // 
             // button1
             // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Location = new System.Drawing.Point(397, 49);
             this.button1.Name = "button1";
             this.helpProvider.SetShowHelp(this.button1, false);
@@ -723,39 +668,51 @@ namespace POP3Pipe
             this.button1.TabIndex = 18;
             this.button1.Text = "test";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Visible = false;
             // 
             // button2
             // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.Location = new System.Drawing.Point(492, 49);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 19;
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // menuStrip
             // 
+            this.menuStrip.BackColor = System.Drawing.Color.Transparent;
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.pop3ServerToolStripMenuItem,
-            this.sMTPServerToolStripMenuItem,
-            this.addressesToolStripMenuItem,
-            this.connectionsToolStripMenuItem});
+            this.configurationToolStripMenuItem,
+            this.aboutToolStripMenuItem});
             this.menuStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(581, 24);
+            this.menuStrip.Size = new System.Drawing.Size(595, 24);
             this.menuStrip.TabIndex = 20;
             this.menuStrip.Text = "Main Menu";
+            // 
+            // configurationToolStripMenuItem
+            // 
+            this.configurationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pop3ServerToolStripMenuItem,
+            this.smtpServerToolStripMenuItem,
+            this.addressesToolStripMenuItem,
+            this.connectionsToolStripMenuItem});
+            this.configurationToolStripMenuItem.Name = "configurationToolStripMenuItem";
+            this.configurationToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
+            this.configurationToolStripMenuItem.Text = "Configuration";
             // 
             // pop3ServerToolStripMenuItem
             // 
             this.pop3ServerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addPOP3ServerToolStripMenuItem,
-            this.deleteServerToolStripMenuItem});
+            this.deletePOP3ServerToolStripMenuItem});
             this.pop3ServerToolStripMenuItem.Name = "pop3ServerToolStripMenuItem";
-            this.pop3ServerToolStripMenuItem.Size = new System.Drawing.Size(80, 20);
+            this.pop3ServerToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.pop3ServerToolStripMenuItem.Text = "POP3 Server";
             // 
             // addPOP3ServerToolStripMenuItem
@@ -763,22 +720,21 @@ namespace POP3Pipe
             this.addPOP3ServerToolStripMenuItem.Name = "addPOP3ServerToolStripMenuItem";
             this.addPOP3ServerToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.addPOP3ServerToolStripMenuItem.Text = "Add Server";
-            this.addPOP3ServerToolStripMenuItem.Click += new System.EventHandler(this.toolMenuPop3Add_Click);
             // 
-            // deleteServerToolStripMenuItem
+            // deletePOP3ServerToolStripMenuItem
             // 
-            this.deleteServerToolStripMenuItem.Name = "deleteServerToolStripMenuItem";
-            this.deleteServerToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
-            this.deleteServerToolStripMenuItem.Text = "Delete Server";
+            this.deletePOP3ServerToolStripMenuItem.Name = "deletePOP3ServerToolStripMenuItem";
+            this.deletePOP3ServerToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.deletePOP3ServerToolStripMenuItem.Text = "Delete Server";
             // 
-            // sMTPServerToolStripMenuItem
+            // smtpServerToolStripMenuItem
             // 
-            this.sMTPServerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.smtpServerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addSMTPServerToolStripMenuItem,
-            this.deleteServerToolStripMenuItem1});
-            this.sMTPServerToolStripMenuItem.Name = "sMTPServerToolStripMenuItem";
-            this.sMTPServerToolStripMenuItem.Size = new System.Drawing.Size(80, 20);
-            this.sMTPServerToolStripMenuItem.Text = "SMTP Server";
+            this.deleteSMTPServerToolStripMenuItem});
+            this.smtpServerToolStripMenuItem.Name = "smtpServerToolStripMenuItem";
+            this.smtpServerToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.smtpServerToolStripMenuItem.Text = "SMTP Server";
             // 
             // addSMTPServerToolStripMenuItem
             // 
@@ -786,11 +742,11 @@ namespace POP3Pipe
             this.addSMTPServerToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.addSMTPServerToolStripMenuItem.Text = "Add Server";
             // 
-            // deleteServerToolStripMenuItem1
+            // deleteSMTPServerToolStripMenuItem
             // 
-            this.deleteServerToolStripMenuItem1.Name = "deleteServerToolStripMenuItem1";
-            this.deleteServerToolStripMenuItem1.Size = new System.Drawing.Size(151, 22);
-            this.deleteServerToolStripMenuItem1.Text = "Delete Server";
+            this.deleteSMTPServerToolStripMenuItem.Name = "deleteSMTPServerToolStripMenuItem";
+            this.deleteSMTPServerToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.deleteSMTPServerToolStripMenuItem.Text = "Delete Server";
             // 
             // addressesToolStripMenuItem
             // 
@@ -798,7 +754,7 @@ namespace POP3Pipe
             this.addAddressToolStripMenuItem,
             this.deleteAddressToolStripMenuItem});
             this.addressesToolStripMenuItem.Name = "addressesToolStripMenuItem";
-            this.addressesToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
+            this.addressesToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.addressesToolStripMenuItem.Text = "Addresses";
             // 
             // addAddressToolStripMenuItem
@@ -806,7 +762,6 @@ namespace POP3Pipe
             this.addAddressToolStripMenuItem.Name = "addAddressToolStripMenuItem";
             this.addAddressToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.addAddressToolStripMenuItem.Text = "Add Address";
-            this.addAddressToolStripMenuItem.Click += new System.EventHandler(this.addAddressToolStripMenuItem_Click);
             // 
             // deleteAddressToolStripMenuItem
             // 
@@ -820,7 +775,7 @@ namespace POP3Pipe
             this.addConnectionToolStripMenuItem,
             this.deleteConnectionToolStripMenuItem});
             this.connectionsToolStripMenuItem.Name = "connectionsToolStripMenuItem";
-            this.connectionsToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
+            this.connectionsToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.connectionsToolStripMenuItem.Text = "Connections";
             // 
             // addConnectionToolStripMenuItem
@@ -828,7 +783,6 @@ namespace POP3Pipe
             this.addConnectionToolStripMenuItem.Name = "addConnectionToolStripMenuItem";
             this.addConnectionToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.addConnectionToolStripMenuItem.Text = "Add Connection";
-            this.addConnectionToolStripMenuItem.Click += new System.EventHandler(this.addConnectionToolStripMenuItem_Click);
             // 
             // deleteConnectionToolStripMenuItem
             // 
@@ -836,44 +790,168 @@ namespace POP3Pipe
             this.deleteConnectionToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.deleteConnectionToolStripMenuItem.Text = "Delete Connection";
             // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.checkForUpdateToolStripMenuItem,
+            this.revisionsToolStripMenuItem,
+            this.aboutThisProgramToolStripMenuItem});
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.aboutToolStripMenuItem.Text = "About";
+            // 
+            // checkForUpdateToolStripMenuItem
+            // 
+            this.checkForUpdateToolStripMenuItem.Name = "checkForUpdateToolStripMenuItem";
+            this.checkForUpdateToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.checkForUpdateToolStripMenuItem.Text = "Check For Update";
+            this.checkForUpdateToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdateToolStripMenuItem_Click);
+            // 
+            // revisionsToolStripMenuItem
+            // 
+            this.revisionsToolStripMenuItem.Name = "revisionsToolStripMenuItem";
+            this.revisionsToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.revisionsToolStripMenuItem.Text = "Revisions";
+            this.revisionsToolStripMenuItem.Click += new System.EventHandler(this.revisionsToolStripMenuItem_Click);
+            // 
+            // aboutThisProgramToolStripMenuItem
+            // 
+            this.aboutThisProgramToolStripMenuItem.Name = "aboutThisProgramToolStripMenuItem";
+            this.aboutThisProgramToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.aboutThisProgramToolStripMenuItem.Text = "About This Program";
+            this.aboutThisProgramToolStripMenuItem.Click += new System.EventHandler(this.aboutThisProgramToolStripMenuItem_Click);
+            // 
+            // threadComManager
+            // 
+            this.threadComManager.WorkerReportsProgress = true;
+            this.threadComManager.WorkerSupportsCancellation = true;
+            this.threadComManager.DoWork += new System.ComponentModel.DoWorkEventHandler(this.threadComManager_DoWork);
+            this.threadComManager.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.threadComManager_RunWorkerCompleted);
+            this.threadComManager.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.threadComManager_ProgressChanged);
+            // 
+            // threadPOP3
+            // 
+            this.threadPOP3.WorkerReportsProgress = true;
+            this.threadPOP3.WorkerSupportsCancellation = true;
+            this.threadPOP3.DoWork += new System.ComponentModel.DoWorkEventHandler(this.threadPOP3_DoWork);
+            this.threadPOP3.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.threadPOP3_RunWorkerCompleted);
+            this.threadPOP3.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.threadPOP3_ProgressChanged);
+            // 
+            // threadSMTP
+            // 
+            this.threadSMTP.WorkerReportsProgress = true;
+            this.threadSMTP.WorkerSupportsCancellation = true;
+            this.threadSMTP.DoWork += new System.ComponentModel.DoWorkEventHandler(this.threadSMTP_DoWork);
+            this.threadSMTP.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.threadSMTP_RunWorkerCompleted);
+            this.threadSMTP.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.threadSMTP_ProgressChanged);
+            // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(463, 1);
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button3.Location = new System.Drawing.Point(397, 117);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(106, 23);
+            this.button3.Size = new System.Drawing.Size(170, 23);
             this.button3.TabIndex = 21;
-            this.button3.Text = "Update";
+            this.button3.Text = "Logger messages";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Visible = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // loadingCircle
+            // 
+            this.loadingCircle.Active = false;
+            this.loadingCircle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.loadingCircle.BackColor = System.Drawing.Color.Transparent;
+            this.loadingCircle.Color = System.Drawing.Color.MintCream;
+            this.loadingCircle.FadeInSpeed = MRG.Controls.UI.LoadingCircle.FadeSpeeds.Slower;
+            this.loadingCircle.FadeOutSpeed = MRG.Controls.UI.LoadingCircle.FadeSpeeds.Slower;
+            this.loadingCircle.InnerCircleRadius = 8;
+            this.loadingCircle.Location = new System.Drawing.Point(553, 4);
+            this.loadingCircle.Name = "loadingCircle";
+            this.loadingCircle.NumberSpoke = 24;
+            this.loadingCircle.OuterCircleRadius = 9;
+            this.loadingCircle.RotationSpeed = 50;
+            this.loadingCircle.Size = new System.Drawing.Size(38, 39);
+            this.loadingCircle.SpokeThickness = 4;
+            this.loadingCircle.StylePreset = MRG.Controls.UI.LoadingCircle.StylePresets.IE7;
+            this.loadingCircle.TabIndex = 22;
+            this.loadingCircle.Text = "loadingCircle";
+            this.loadingCircle.Visible = false;
+            // 
+            // button4
+            // 
+            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button4.Location = new System.Drawing.Point(397, 88);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 23;
+            this.button4.Text = "Show Circle";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button5
+            // 
+            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button5.ForeColor = System.Drawing.Color.Black;
+            this.button5.Location = new System.Drawing.Point(492, 88);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 24;
+            this.button5.Text = "Hide Circle";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button6
+            // 
+            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button6.Location = new System.Drawing.Point(397, 172);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(159, 23);
+            this.button6.TabIndex = 25;
+            this.button6.Text = "Test SMTP Automatic";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button7
+            // 
+            this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button7.Location = new System.Drawing.Point(397, 143);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(159, 23);
+            this.button7.TabIndex = 26;
+            this.button7.Text = "Test Read/Write UID";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(581, 247);
+            this.BackgroundImage = global::POP3Pipe.Properties.Resources.background;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(595, 266);
+            this.Controls.Add(this.button7);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.loadingCircle);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.btnStart);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.menuStrip);
-            this.Controls.Add(this.lblCountdown);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnStart);
+            this.Controls.Add(this.button6);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.HelpButton = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "MainWindow";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "POP3 === Pipe";
             this.Deactivate += new System.EventHandler(this.MainWindow_Deactivate);
+            this.Load += new System.EventHandler(this.MainWindow_Load);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainWindow_FormClosed);
             this.contextMenuPOP3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericHours)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericMinutes)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericSeconds)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.tabControl.ResumeLayout(false);
             this.tabPagePOP3.ResumeLayout(false);
             this.tabPageSMTP.ResumeLayout(false);
@@ -883,6 +961,7 @@ namespace POP3Pipe
             this.tabPageConnections.ResumeLayout(false);
             this.contextMenuConnections.ResumeLayout(false);
             this.tabLogs.ResumeLayout(false);
+            this.contextMenuLogs.ResumeLayout(false);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -895,14 +974,6 @@ namespace POP3Pipe
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.ListView listViewPOP3;
         private System.Windows.Forms.ColumnHeader colPOP3User;
-        private System.Windows.Forms.NumericUpDown numericHours;
-        private System.Windows.Forms.Label lblHours;
-        private System.Windows.Forms.Label lblMinutes;
-        private System.Windows.Forms.NumericUpDown numericMinutes;
-        private System.Windows.Forms.Label lblSeconds;
-        private System.Windows.Forms.NumericUpDown numericSeconds;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckBox checkBoxCyclingActive;
         private System.Windows.Forms.ContextMenuStrip contextMenuPOP3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuPop3Edit;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuPop3Delete;
@@ -915,8 +986,6 @@ namespace POP3Pipe
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuPop3Add;
         private System.Windows.Forms.TabPage tabLogs;
         private System.Windows.Forms.RichTextBox textLog;
-        private System.Windows.Forms.Button btnExpand;
-        private System.Windows.Forms.Label lblCountdown;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TabPage tabPageSMTP;
@@ -935,18 +1004,6 @@ namespace POP3Pipe
         private System.Windows.Forms.ColumnHeader colConnectionsSMTP;
         private System.Windows.Forms.ColumnHeader colConnectionsDestination;
         private System.Windows.Forms.MenuStrip menuStrip;
-        private System.Windows.Forms.ToolStripMenuItem connectionsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addConnectionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem deleteConnectionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pop3ServerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addPOP3ServerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem deleteServerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sMTPServerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addSMTPServerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem deleteServerToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem addressesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addAddressToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem deleteAddressToolStripMenuItem;
         private System.Windows.Forms.ColumnHeader colPOP3Active;
         private System.Windows.Forms.ColumnHeader colSMTPActive;
         private System.Windows.Forms.ColumnHeader colAddressesActive;
@@ -972,7 +1029,34 @@ namespace POP3Pipe
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.HelpProvider helpProvider;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem checkForUpdateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem revisionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutThisProgramToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem configurationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem connectionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addConnectionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteConnectionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addressesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addAddressToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteAddressToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem smtpServerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addSMTPServerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteSMTPServerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pop3ServerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addPOP3ServerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deletePOP3ServerToolStripMenuItem;
+        private System.ComponentModel.BackgroundWorker threadComManager;
+        private System.ComponentModel.BackgroundWorker threadPOP3;
+        private System.ComponentModel.BackgroundWorker threadSMTP;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ContextMenuStrip contextMenuLogs;
+        private System.Windows.Forms.ToolStripMenuItem clearConsoleToolStripMenuItem;
+        private MRG.Controls.UI.LoadingCircle loadingCircle;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
     }
 }
 

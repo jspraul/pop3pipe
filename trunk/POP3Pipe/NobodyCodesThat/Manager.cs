@@ -32,7 +32,7 @@ namespace POP3Pipe
             Manager.running = true;
             for (int i = 0; i < connections.Count; i++)
             {
-                Messenger.sendMessage("Starting process", Messenger.MessageTag.INFO);
+                Logger.sendMessage("Starting process", Logger.MessageTag.INFO);
                 Thread ta = new Thread(new ParameterizedThreadStart(fetchMails));
                 ta.Name = "connector-"+i;
                 ta.Start(connections[i]);
@@ -44,12 +44,15 @@ namespace POP3Pipe
             return running;
         }
 
-        public static void stopJob()
+        public static void stopJob(bool notify)
         {
             Manager.running = false;
             MailPOP3.running = false;
             MailSMTP.running = false;
-            Messenger.sendMessage("Process stopped", Messenger.MessageTag.INFO);
+            if (notify)
+            {
+                Logger.sendMessage("Process stopped", Logger.MessageTag.INFO);
+            }
         }
 
         private static void fetchMails(object conRawObj)
@@ -63,6 +66,7 @@ namespace POP3Pipe
 
             while (Manager.running)
             {
+                DateTime startTime = DateTime.Now;
                 Manager.threadCount++;
                 if (Manager.threadCount > 1)
                 {
@@ -94,32 +98,32 @@ namespace POP3Pipe
                                         MailSMTP.Send(msgs, smtphost, address);
                                     }
                                 }
-                                Messenger.sendMessage(null, Messenger.MessageTag.DIVIDE);
+                                Logger.sendMessage(null, Logger.MessageTag.DIVIDE);
                             }
                             else
                             {
-                                Messenger.sendMessage("Sending to E-Mail contact <" + address.AddressName + "> is disabled. Skipping...", Messenger.MessageTag.INFO);
+                                Logger.sendMessage("Sending to E-Mail contact [" + address.AddressName + "] is disabled. Skipping...", Logger.MessageTag.INFO);
                             }
                         }
                         else
                         {
-                            Messenger.sendMessage("Piping mails via SMTP host <" + smtphost.Description + "> is disabled. Skipping...", Messenger.MessageTag.INFO);
+                            Logger.sendMessage("Piping mails via SMTP host [" + smtphost.Description + "] is disabled. Skipping...", Logger.MessageTag.INFO);
                         }
                     }
                     else
                     {
-                        Messenger.sendMessage("Fetching mails from POP3 host <" + pop3host.Description + "> is disabled. Skipping...", Messenger.MessageTag.INFO);
+                        Logger.sendMessage("Fetching mails from POP3 host [" + pop3host.Description + "] is disabled. Skipping...", Logger.MessageTag.INFO);
                     }
                 }
                 else
                 {
-                    Messenger.sendMessage("Connection from <" + pop3host.Description + "> over <" + smtphost.Description + "> to <" + address.AddressName + "> is disabled. Skipping...", Messenger.MessageTag.INFO);
+                    Logger.sendMessage("Connection from [" + pop3host.Description + "] over [" + smtphost.Description + "] to [" + address.AddressName + "] is disabled. Skipping...", Logger.MessageTag.INFO);
                 }
 
                 Manager.threadCount--;
                 Console.WriteLine("Release lock for next waiting thread.");
                 Manager.mre.Set();
-                if (conObj.WaitTime.Milliseconds == 0)
+                if (conObj.WaitTime.TotalMilliseconds == 0)
                 {
                     Manager.jobsFinished++;
                     Console.WriteLine("Single run mode active, finishing...");
@@ -132,14 +136,20 @@ namespace POP3Pipe
                         MainWindow mainWind = (MainWindow)MainWindow.ActiveForm;
                         if (mainWind != null && !mainWind.Disposing && !mainWind.IsDisposed)
                         {
-                            mainWind.UpdateStartButton();
+                            mainWind.UpdateStartButtonLabel();
                         }
                     }
                     return;
                 }
                 Console.WriteLine("Finished cycle for thread: " + Thread.CurrentThread.Name);
-                Console.WriteLine("Waiting " + conObj.WaitTime.Milliseconds + " milliseconds...");
-                Thread.Sleep(conObj.WaitTime.Milliseconds);
+                Console.WriteLine("Waiting " + conObj.WaitTime.TotalMilliseconds + " milliseconds...");
+                TimeSpan waitTimeFromNow = conObj.WaitTime - (DateTime.Now - startTime);
+                TimeSpan partialSleepSpan = new TimeSpan(0, 0, 1);
+                while (Manager.isRunning() && (waitTimeFromNow.TotalMilliseconds > 0))
+                {
+                    Thread.Sleep(partialSleepSpan);
+                    waitTimeFromNow = waitTimeFromNow - partialSleepSpan;
+                }
             }
         }
     }
