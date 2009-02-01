@@ -1,0 +1,10 @@
+C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\MIMEParser\bin\Debug\MIMEParser.dll
+C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\MIMEParser\bin\Debug\MIMEParser.pdb
+C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\MIMEParser\obj\Debug\ResolveAssemblyReference.cache
+C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\MIMEParser\obj\Debug\MIMEParser.dll
+C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\MIMEParser\obj\Debug\MIMEParser.pdb
+C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\Projects\POP3Pipe\MIMEParser\bin\Debug\MIMEParser.dll
+C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\Projects\POP3Pipe\MIMEParser\bin\Debug\MIMEParser.pdb
+C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\Projects\POP3Pipe\MIMEParser\obj\Debug\ResolveAssemblyReference.cache
+C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\Projects\POP3Pipe\MIMEParser\obj\Debug\MIMEParser.dll
+C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\Projects\POP3Pipe\MIMEParser\obj\Debug\MIMEParser.pdb
