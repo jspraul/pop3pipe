@@ -16,7 +16,7 @@ namespace POP3Pipe
             Program.info.ModuleName = "pop3pipe";
             Program.info.Version = "080";
             Program.info.Build = "25062008";
-            Program.info.UpdateLocation = "http://pop3pipe.googlecode.com/svn/trunk";
+            Program.info.UpdateLocations = new string[] {"http://pop3pipe.googlecode.com/svn/trunk"};
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
