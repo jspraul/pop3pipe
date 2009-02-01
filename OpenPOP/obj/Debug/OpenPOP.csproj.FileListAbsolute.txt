@@ -1,0 +1,8 @@
+C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\OpenPOP\obj\Debug\ResolveAssemblyReference.cache
+C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\Projects\POP3Pipe\OpenPOP\obj\Debug\ResolveAssemblyReference.cache
+C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\Projects\POP3Pipe\OpenPOP\bin\Debug\OpenPOP.dll
+C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\Projects\POP3Pipe\OpenPOP\bin\Debug\OpenPOP.pdb
+C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\Projects\POP3Pipe\OpenPOP\bin\Debug\MIMEParser.dll
+C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\Projects\POP3Pipe\OpenPOP\bin\Debug\MIMEParser.pdb
+C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\Projects\POP3Pipe\OpenPOP\obj\Debug\OpenPOP.dll
+C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\Projects\POP3Pipe\OpenPOP\obj\Debug\OpenPOP.pdb
