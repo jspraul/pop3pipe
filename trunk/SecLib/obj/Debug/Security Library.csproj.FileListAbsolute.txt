@@ -1,0 +1,6 @@
+C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\seclib\obj\Debug\ResolveAssemblyReference.cache
+C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\Projects\POP3Pipe\SecLib\obj\Debug\ResolveAssemblyReference.cache
+C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\Projects\POP3Pipe\SecLib\bin\Debug\Org.Mentalis.Security.dll
+C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\Projects\POP3Pipe\SecLib\bin\Debug\Org.Mentalis.Security.pdb
+C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\Projects\POP3Pipe\SecLib\obj\Debug\Org.Mentalis.Security.dll
+C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Visual Studio 2008\Projects\POP3Pipe\SecLib\obj\Debug\Org.Mentalis.Security.pdb
