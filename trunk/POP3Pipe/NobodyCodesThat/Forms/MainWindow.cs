@@ -314,17 +314,17 @@ namespace POP3Pipe
 
         private void checkForUpdateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new UpdateStarter().Update(Program.info, false);
+            //new UpdateStarter().Update(Program.info, false);
         }
 
         private void revisionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new UpdateStarter().Overview(Program.info);
+            //new UpdateStarter().Overview(Program.info);
         }
 
         private void aboutThisProgramToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new AboutBox(Program.info.Version).Show();
+            //new AboutBox(Program.info.Version).Show();
         }
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)

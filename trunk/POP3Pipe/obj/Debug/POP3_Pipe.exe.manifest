@@ -101,26 +101,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="POP3_Pipe.exe" size="369664">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="POP3_Pipe.exe" size="369152">
       <assemblyIdentity name="POP3_Pipe" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>an2kp3kmhF8UXUcc/O2OER89jXE=</dsig:DigestValue>
+        <dsig:DigestValue>ZxWHHwmY11g006CrYPwft/ouypQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Updater.dll" size="35840">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Updater.dll" size="42496">
       <assemblyIdentity name="Updater" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>sua/+spppFKVR5SKuW1d6UYviIc=</dsig:DigestValue>
+        <dsig:DigestValue>FO+sUAPTCgphBuo1aOzetMOIG1M=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
