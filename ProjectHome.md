@@ -1,0 +1,1 @@
+Pop3Pipe acts like a pipeline between different mailboxes. This tool automatically gets mails from several mailboxes and sends them to another. Time periods can be defined to stay up to date. It is possible to define "connections", these consist of a source POP3 host, a submitting SMTP server and a destination address. Simply create as much connections as you need.
